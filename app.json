@@ -1,0 +1,65 @@
+{
+  "expo": {
+    "name": "Nosotros",
+    "slug": "couple-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "coupleapp",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#B3D9FF"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.coupleapp.nosotros",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Para fotos de recuerdos y escanear código QR de tu pareja.",
+        "NSPhotoLibraryUsageDescription": "Para subir fotos de recuerdos.",
+        "NSLocationWhenInUseUsageDescription": "Para marcar lugares de citas en el mapa."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#B3D9FF"
+      },
+      "package": "com.coupleapp.nosotros",
+      "permissions": [
+        "CAMERA",
+        "READ_MEDIA_IMAGES",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#FFB3D9"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permite escanear el código QR de tu pareja."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Permite ubicar citas en el mapa."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

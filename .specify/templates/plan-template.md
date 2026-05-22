@@ -4,7 +4,7 @@
 
 **Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
-**Note**: This template is filled in by the `/speckit-plan` command. See `.specify/templates/plan-template.md` for the execution workflow.
+**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/plan-template.md` for the execution workflow.
 
 ## Summary
 
@@ -40,7 +40,18 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Reference: `.specify/memory/constitution.md` (Aplicación de Pareja v1.0.0)
+
+| Principle | Gate (MUST pass) |
+|-----------|------------------|
+| I. Calidad del código | Capas separadas (UI / negocio / servicios / storage / config); sin duplicación ni secretos hardcodeados |
+| II. Pruebas | Plan de pruebas para lógica crítica y dominios tocados (auth, pareja, eventos, fotos, metas, deseos, notificaciones) |
+| III. UX | Navegación y paleta (azul claro, rosa claro) coherentes; mensajes de error/confirmación definidos |
+| IV. Rendimiento | Fotos/sync con carga progresiva, paginación y progreso visible; UI no bloqueante |
+| V. Seguridad | Espacio de 2 miembros; permisos antes de leer/escribir; sin credenciales en código |
+| VI. Mantenibilidad | Componentes reutilizables; cambios acotados y documentación de decisiones |
+
+**Result**: ☐ PASS — ☐ FAIL (justify violations in Complexity Tracking below)
 
 ## Project Structure
 
@@ -48,12 +59,12 @@
 
 ```text
 specs/[###-feature]/
-├── plan.md              # This file (/speckit-plan command output)
-├── research.md          # Phase 0 output (/speckit-plan command)
-├── data-model.md        # Phase 1 output (/speckit-plan command)
-├── quickstart.md        # Phase 1 output (/speckit-plan command)
-├── contracts/           # Phase 1 output (/speckit-plan command)
-└── tasks.md             # Phase 2 output (/speckit-tasks command - NOT created by /speckit-plan)
+├── plan.md              # This file (/speckit.plan command output)
+├── research.md          # Phase 0 output (/speckit.plan command)
+├── data-model.md        # Phase 1 output (/speckit.plan command)
+├── quickstart.md        # Phase 1 output (/speckit.plan command)
+├── contracts/           # Phase 1 output (/speckit.plan command)
+└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
 ### Source Code (repository root)

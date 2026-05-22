@@ -1,0 +1,8 @@
+specs/
+docs/
+.supabase/
+*.md
+!README.md
+tests/
+.git/
+node_modules/

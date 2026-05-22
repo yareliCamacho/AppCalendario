@@ -3,6 +3,15 @@ alwaysApply: true
 ---
 
 <!-- SPECKIT START -->
-For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+For additional context about technologies, project structure, and commands, read:
+- **Plan**: `specs/001-couple-mobile-app/plan.md`
+- **Spec**: `specs/001-couple-mobile-app/spec.md`
+- **Data model**: `specs/001-couple-mobile-app/data-model.md`
+- **Quickstart**: `specs/001-couple-mobile-app/quickstart.md`
+
+**Stack**: React Native + Expo + TypeScript | Supabase (Auth, PostgreSQL, Storage, RLS, Realtime) | FCM + Expo Notifications | Google Maps | OpenAI/Gemini (optional AI)
+
+**Architecture**: `app/` screens → `src/hooks` → `src/services` → `src/repositories` → Supabase. Layers: components, types, utils, config.
+
+**Branch**: `001-couple-mobile-app`
 <!-- SPECKIT END -->

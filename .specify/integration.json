@@ -2,14 +2,39 @@
   "version": "0.8.13",
   "integration_state_schema": 1,
   "installed_integrations": [
-    "cursor-agent"
+    "claude",
+    "gemini",
+    "copilot",
+    "codex",
+    "cursor-agent",
+    "agy"
   ],
   "integration_settings": {
+    "claude": {
+      "script": "ps",
+      "invoke_separator": "-"
+    },
+    "gemini": {
+      "script": "ps",
+      "invoke_separator": "."
+    },
+    "copilot": {
+      "script": "ps",
+      "invoke_separator": "."
+    },
+    "codex": {
+      "script": "ps",
+      "invoke_separator": "-"
+    },
     "cursor-agent": {
+      "script": "ps",
+      "invoke_separator": "-"
+    },
+    "agy": {
       "script": "ps",
       "invoke_separator": "-"
     }
   },
-  "integration": "cursor-agent",
-  "default_integration": "cursor-agent"
+  "integration": "copilot",
+  "default_integration": "copilot"
 }
