@@ -1,0 +1,4 @@
+-- Obsoleto: no ejecutar en producción si ya corriste una versión anterior de este script.
+-- El flag reminder_only se guarda al crear la fecha desde la app (switch «Enviar recordatorio»).
+-- Si fechas quedaron mal marcadas, usa 014 o:
+--   UPDATE public.events SET reminder_only = false WHERE event_date = '2026-05-02';

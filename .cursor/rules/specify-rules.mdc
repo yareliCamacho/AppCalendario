@@ -9,9 +9,9 @@ For additional context about technologies, project structure, and commands, read
 - **Data model**: `specs/001-couple-mobile-app/data-model.md`
 - **Quickstart**: `specs/001-couple-mobile-app/quickstart.md`
 
-**Stack**: React Native + Expo + TypeScript | Supabase (Auth, PostgreSQL, Storage, RLS, Realtime) | FCM + Expo Notifications | Google Maps | OpenAI/Gemini (optional AI)
+**Stack**: React Native + Expo + TypeScript | Supabase (Auth, PostgreSQL, Storage, RLS, Realtime) | FCM + Expo Notifications | OpenStreetMap (mapas gratis) | OpenAI/Gemini (optional AI)
 
-**Architecture**: `app/` screens → `src/hooks` → `src/services` → `src/repositories` → Supabase. Layers: components, types, utils, config.
+**Architecture**: `frontend/app/` screens → `frontend/src/hooks` → `frontend/src/services` → `frontend/src/repositories` → Supabase (`backend/supabase/`). Layers: components, types, utils, config.
 
 **Branch**: `001-couple-mobile-app`
 <!-- SPECKIT END -->

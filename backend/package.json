@@ -1,0 +1,8 @@
+{
+  "name": "couple-app-backend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "bundle-sql": "powershell -ExecutionPolicy Bypass -File scripts/build-remote-setup.ps1"
+  }
+}

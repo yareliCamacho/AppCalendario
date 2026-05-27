@@ -1,6 +1,6 @@
 # EAS Build — Android e iOS
 
-Requisito previo: **Supabase remoto configurado** (`docs/SUPABASE-REMOTO.md`) y `.env` local funcionando con `npx expo start`.
+Requisito previo: **Supabase remoto configurado** (`docs/SUPABASE-REMOTO.md`) y `frontend/.env` funcionando con `npx expo start` desde `frontend/`.
 
 ## 1. Cuenta Expo
 
@@ -11,15 +11,15 @@ eas login
 
 ## 2. Vincular proyecto Expo
 
-Desde la raíz del repo:
+Desde la carpeta del frontend:
 
 ```powershell
-cd C:\Users\yareli.camacho\Downloads\my-Project
+cd frontend
 eas init
 ```
 
 - Confirma crear proyecto Expo si no existe  
-- Se añadirá `extra.eas.projectId` en `app.config.ts` / `app.json`
+- Se añadirá `extra.eas.projectId` en `frontend/app.config.ts` / `frontend/app.json`
 
 ## 3. Secretos EAS (variables de entorno en la nube)
 
@@ -28,8 +28,9 @@ No subas `.env` al repositorio. Configura secretos para builds:
 ```powershell
 eas secret:create --name EXPO_PUBLIC_SUPABASE_URL --value "https://TU_PROYECTO.supabase.co" --type string
 eas secret:create --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value "TU_ANON_KEY" --type string
-eas secret:create --name EXPO_PUBLIC_GOOGLE_MAPS_API_KEY --value "TU_MAPS_KEY" --type string
 ```
+
+> No se requiere clave de Google Maps. Mapas y búsqueda usan OpenStreetMap (gratis). Ver [MAPAS-GRATIS.md](MAPAS-GRATIS.md).
 
 Listar:
 
@@ -53,9 +54,12 @@ eas secret:create --name OPENAI_API_KEY --value "sk-..." --type string
 
 ## 5. Build preview (recomendado para probar en teléfono)
 
+Ejecuta los comandos `eas` desde `frontend/` (donde están `eas.json` y `app.config.ts`).
+
 ### Android (APK interno)
 
 ```powershell
+cd frontend
 eas build --platform android --profile preview
 ```
 
@@ -84,20 +88,11 @@ eas build --platform ios --profile production
 
 Android genera **AAB** para Google Play. iOS genera archivo para **App Store Connect**.
 
-## 7. Google Maps en builds nativos
+## 7. Mapas en builds nativos (gratis)
 
-La API key debe estar en EAS secrets como `EXPO_PUBLIC_GOOGLE_MAPS_API_KEY`.
+Los mapas usan **OpenStreetMap** en la app. No configures secretos de Google.
 
-En Google Cloud Console, restringe la key por:
-
-- **Android**: package `com.coupleapp.nosotros` + SHA-1 del keystore de EAS  
-- **iOS**: bundle `com.coupleapp.nosotros`
-
-Obtener SHA-1 de EAS:
-
-```powershell
-eas credentials -p android
-```
+Ver [MAPAS-GRATIS.md](MAPAS-GRATIS.md).
 
 ## 8. Push notifications (FCM / APNs)
 

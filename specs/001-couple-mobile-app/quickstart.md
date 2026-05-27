@@ -16,9 +16,8 @@
 ## 1. Supabase project
 
 ```bash
-# En la raíz del repo (cuando exista carpeta supabase/)
+cd backend
 supabase login
-supabase init
 supabase link --project-ref <YOUR_PROJECT_REF>
 ```
 
@@ -40,16 +39,17 @@ Seed mensajes románticos:
 
 ```bash
 supabase db execute -f supabase/seed.sql
+# (desde carpeta backend/)
 ```
 
 ## 2. Environment variables
 
-Crear `.env` (no commitear secretos):
+Crear `frontend/.env` (no commitear secretos):
 
 ```env
 EXPO_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...
-EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=AIza...   # restringir por app id
+# Mapas/lugares: OpenStreetMap gratis (no requiere Google Maps API)
 # EAS Secrets (no en .env local para producción):
 # AI_PROVIDER=openai|gemini
 # OPENAI_API_KEY= / GEMINI_API_KEY=

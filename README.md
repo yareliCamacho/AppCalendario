@@ -1,12 +1,12 @@
 # Nosotros — App móvil para parejas
 
-React Native + Expo + TypeScript + Supabase.
+Monorepo: **frontend** (Expo + React Native) y **backend** (Supabase: SQL, RLS, Storage, Edge Functions).
 
 ## Requisitos
 
 - Node.js 20+
 - Cuenta [Supabase](https://supabase.com)
-- (Opcional) Google Maps API, OpenAI/Gemini, FCM para push en producción
+- (Opcional) OpenAI/Gemini, FCM para push en producción. **Mapas y búsqueda de lugares son gratis** (ver [docs/MAPAS-GRATIS.md](docs/MAPAS-GRATIS.md))
 
 ## Guías de despliegue
 
@@ -15,36 +15,68 @@ React Native + Expo + TypeScript + Supabase.
 
 ## Configuración local
 
-1. Copia `.env.example` a `.env` y completa:
+### Frontend (app móvil)
+
+1. Configura Supabase en **`frontend/.env`** (o deja el `.env` en la raíz del repo; la app lee ambos):
+
+Copia `frontend/.env.example` → `frontend/.env` si hace falta, y completa:
 
 ```env
 EXPO_PUBLIC_SUPABASE_URL=
 EXPO_PUBLIC_SUPABASE_ANON_KEY=
-EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=
 ```
 
-2. Aplica migraciones en Supabase (SQL Editor o CLI):
+2. Si en la raíz queda `package-lock.json`, muévelo: doble clic en `MOVE-LOCK.cmd` (o `move package-lock.json frontend\`).
+
+3. Instala y arranca (desde `frontend/` o desde la raíz con `npm start`):
 
 ```bash
-supabase db push
-# o ejecuta en orden: supabase/migrations/*.sql y supabase/seed.sql
-```
-
-3. Instala y arranca:
-
-```bash
+cd frontend
 npm install --legacy-peer-deps
 npm run generate-assets
 npx expo start
 ```
 
-4. Iconos: `npm run generate-assets` crea placeholders en `assets/`. Sustitúyelos por diseños finales antes de publicar.
+Desde la raíz del repo también puedes usar:
+
+```bash
+npm install --legacy-peer-deps --prefix frontend
+npm start
+```
+
+4. Iconos: `npm run generate-assets` crea placeholders en `frontend/assets/`.
+
+### Backend (Supabase)
+
+Aplica migraciones desde `backend/`:
+
+```bash
+cd backend
+supabase link --project-ref TU_PROJECT_REF
+supabase db push
+# o ejecuta backend/supabase/migrations/*.sql y seed.sql en SQL Editor
+```
+
+SQL unificado para pegar en el editor:
+
+```bash
+npm run supabase:bundle-sql
+# genera backend/supabase/remote-setup.sql
+```
 
 ## Estructura
 
-- `app/` — pantallas (Expo Router)
-- `src/components`, `src/hooks`, `src/services`, `src/repositories` — arquitectura en capas
-- `supabase/` — migraciones, seed, Edge Function push
+```text
+frontend/
+├── app/          # pantallas (Expo Router)
+├── src/          # components, hooks, services, repositories
+├── assets/
+└── package.json
+
+backend/
+├── supabase/     # migraciones, seed, Edge Function push
+└── scripts/      # build-remote-setup.ps1
+```
 
 ## Pantallas
 

@@ -63,38 +63,34 @@ specs/001-couple-mobile-app/
 └── tasks.md             # Generado por /speckit.tasks (no por este comando)
 ```
 
-### Source Code (repository root)
+### Source Code (monorepo)
 
 ```text
-app/                          # Expo Router (pantallas = file-based routes)
-├── (auth)/                   # login, register, pair-link, qr-scan
-├── (tabs)/                   # inicio, calendario, dias, deseos, metas, config
-├── calendar/                 # detalle día, agregar fecha/ubicación/fotos
-└── _layout.tsx
+frontend/                     # Expo app (cliente móvil)
+├── app/                      # Expo Router (pantallas = file-based routes)
+│   ├── (auth)/               # login, register, pair-link, qr-scan
+│   ├── (tabs)/               # inicio, calendario, dias, deseos, metas, config
+│   ├── calendar/             # detalle día, agregar fecha/ubicación/fotos
+│   └── _layout.tsx
+├── src/
+│   ├── components/           # UI reutilizable
+│   ├── hooks/                # useCouple, usePhotoUpload, useRealtimeSync, ...
+│   ├── services/             # AuthService, PairingService, ...
+│   ├── repositories/         # Supabase*Repository
+│   ├── types/                # DB types, zod schemas
+│   ├── utils/
+│   └── config/               # env, theme, supabase client
+├── tests/
+└── assets/
 
-src/
-├── components/               # UI reutilizable (HeartPhoto, PhotoGallery, ...)
-├── hooks/                    # useCouple, useEvents, usePhotoUpload, useRealtime
-├── services/                 # AuthService, PairingService, AiSuggestionService, ...
-├── repositories/             # Supabase*Repository (datos + Storage)
-├── types/                    # DB types, domain models, zod schemas
-├── utils/                    # dates, image optimize, formatters
-└── config/                   # env, theme tokens, supabase client
-
-supabase/
-├── migrations/               # SQL versionado
-├── functions/                # Edge: send-push, consume-pair-code (opcional)
-└── seed.sql                  # frases amor / mensajes bonitos
-
-tests/
-├── unit/                     # hooks, services, utils
-├── integration/              # repositories con Supabase local
-└── e2e/                      # flujos P1, P3, P7
-
-assets/                       # iconos, fuentes románticas
+backend/                      # Supabase (infraestructura)
+└── supabase/
+    ├── migrations/           # SQL versionado
+    ├── functions/            # Edge: send-push
+    └── seed.sql
 ```
 
-**Structure Decision**: Monorepo cliente Expo en raíz con carpeta `supabase/` para infraestructura. Separación estricta: pantallas solo componen UI y llaman hooks; hooks orquestan servicios; servicios aplican reglas de negocio; repositorios encapsulan Supabase/Storage/Realtime.
+**Structure Decision**: Monorepo con `frontend/` (Expo) y `backend/` (Supabase CLI / migraciones). Separación estricta: pantallas solo componen UI y llaman hooks; hooks orquestan servicios; servicios aplican reglas de negocio; repositorios encapsulan Supabase/Storage/Realtime.
 
 ## Architecture Overview
 
