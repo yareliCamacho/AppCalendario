@@ -12,6 +12,7 @@ Monorepo: **frontend** (Expo + React Native) y **backend** (Supabase: SQL, RLS, 
 
 1. **[Supabase remoto](docs/SUPABASE-REMOTO.md)** — base de datos, Auth, RLS, Storage, Realtime  
 2. **[EAS Build](docs/EAS-BUILD.md)** — APK/IPA para Android e iOS  
+3. **[Web auxiliar en Vercel](docs/VERCEL-WEB.md)** — misma app en el navegador (calendario, recuerdos, metas)  
 
 ## Configuración local
 

@@ -2,29 +2,12 @@ import { useEffect, useMemo, useRef } from 'react';
 import MapView, { Marker, UrlTile, type MapPressEvent } from 'react-native-maps';
 import { StyleSheet, View, Text } from 'react-native';
 import { colors } from '../../config/theme';
+import type { CoupleMapProps, MapMarker } from './coupleMapTypes';
 
-export type MapMarker = {
-  latitude: number;
-  longitude: number;
-  title?: string;
-  description?: string;
-};
+export type { MapMarker } from './coupleMapTypes';
 
 /** Tiles OpenStreetMap — sin API key de Google */
 const OSM_TILE = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-
-type Props = {
-  latitude: number;
-  longitude: number;
-  title?: string;
-  height?: number;
-  markers?: MapMarker[];
-  onCoordinateChange?: (lat: number, lng: number) => void;
-  /** Bloquea mover/zoom/tocar el mapa (p. ej. recuerdos del día) */
-  fixed?: boolean;
-  /** Pin en forma de corazón */
-  heartPin?: boolean;
-};
 
 function HeartPinMarker({ marker }: { marker: MapMarker }) {
   return (
@@ -52,7 +35,7 @@ export function CoupleMap({
   onCoordinateChange,
   fixed = false,
   heartPin = false,
-}: Props) {
+}: CoupleMapProps) {
   const mapRef = useRef<MapView>(null);
 
   const allMarkers: MapMarker[] = markers?.length

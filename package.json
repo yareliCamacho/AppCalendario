@@ -9,6 +9,8 @@
     "test": "npm run test --prefix frontend",
     "typecheck": "npm run typecheck --prefix frontend",
     "generate-assets": "npm run generate-assets --prefix frontend",
+    "web": "npm run web --prefix frontend",
+    "build:web": "npm run build:web --prefix frontend",
     "supabase:bundle-sql": "powershell -ExecutionPolicy Bypass -File backend/scripts/build-remote-setup.ps1",
     "split": "node monorepo-split.mjs"
   }

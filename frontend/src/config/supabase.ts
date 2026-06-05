@@ -1,12 +1,12 @@
 import 'react-native-url-polyfill/auto';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
+import { createAuthStorage } from './authStorage';
 import { env, isSupabaseConfigured } from './env';
 
 export const supabase = isSupabaseConfigured()
   ? createClient(env.supabaseUrl, env.supabaseAnonKey, {
       auth: {
-        storage: AsyncStorage,
+        storage: createAuthStorage(),
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: false,

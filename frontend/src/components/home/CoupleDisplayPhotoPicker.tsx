@@ -113,7 +113,6 @@ export async function pickDisplayPhotoFromGallery(
   coupleId: string,
   userId: string,
 ): Promise<boolean> {
-  if (Platform.OS === 'web') return false;
   const picked = await pickCroppedImage('library');
   if (!picked.ok) {
     if (picked.reason === 'permission') {

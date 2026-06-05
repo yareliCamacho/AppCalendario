@@ -3,13 +3,15 @@ import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import { userRepository } from '../repositories/UserRepository';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
+if (Platform.OS !== 'web') {
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
+}
 
 export class PushService {
   private resolveProjectId(): string | undefined {
@@ -22,6 +24,8 @@ export class PushService {
   }
 
   async register(userId: string): Promise<string | null> {
+    if (Platform.OS === 'web') return null;
+
     const { status: existing } = await Notifications.getPermissionsAsync();
     let finalStatus = existing;
     if (existing !== 'granted') {

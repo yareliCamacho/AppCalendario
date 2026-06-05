@@ -13,7 +13,19 @@ export type PickCroppedResult =
  */
 export async function pickCroppedImage(source: PickImageSource): Promise<PickCroppedResult> {
   if (Platform.OS === 'web') {
-    return { ok: false, reason: 'unsupported' };
+    if (source === 'camera') {
+      return { ok: false, reason: 'unsupported' };
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      quality: 0.92,
+      exif: false,
+    });
+    if (result.canceled || !result.assets[0]?.uri) {
+      return { ok: false, reason: 'canceled' };
+    }
+    return { ok: true, uri: result.assets[0].uri };
   }
 
   const perm =
@@ -53,7 +65,7 @@ export function pickCroppedErrorMessage(
     case 'permission':
       return 'Permite acceso a fotos o cámara en los ajustes del teléfono.';
     case 'unsupported':
-      return 'El recorte con zoom está disponible en la app del teléfono, no en el navegador.';
+      return 'La cámara en vivo no está disponible en el navegador; elige una foto de tu galería.';
     default:
       return '';
   }
